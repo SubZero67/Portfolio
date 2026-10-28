@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tejas B M – Testing Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Public+Sans:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#FFFFFF;--panel:#F2F2F2;--ink:#000000;--muted:#555555;--line:#CFCFCF;
+  --hero:#000000;--hero-ink:#FFFFFF;--hero-muted:#BDBDBD;--hline:rgba(255,255,255,.3);
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;--body:"Public Sans",system-ui,sans-serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#000000;--panel:#161616;--ink:#FFFFFF;--muted:#A8A8A8;--line:#333333;--hero:#FFFFFF;--hero-ink:#000000;--hero-muted:#444444;--hline:rgba(0,0,0,.3)}
+}
+:root[data-theme="dark"]{--bg:#000000;--panel:#161616;--ink:#FFFFFF;--muted:#A8A8A8;--line:#333333;--hero:#FFFFFF;--hero-ink:#000000;--hero-muted:#444444;--hline:rgba(0,0,0,.3)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--hero);z-index:10}
+a{color:inherit}
+:focus-visible{outline:3px solid currentColor;outline-offset:3px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.05}
+h1{font-weight:800;font-size:clamp(3rem,10vw,6.5rem);letter-spacing:-.03em}
+h2{font-weight:800;font-size:clamp(1.8rem,4.5vw,2.6rem);letter-spacing:-.01em;margin-bottom:10px}
+h3{font-weight:800;font-size:1.3rem}
+p{margin:0 0 1em;max-width:62ch}
+.lede{color:var(--muted);margin-bottom:32px}
+
+.band{background:var(--hero);color:var(--hero-ink);padding-bottom:48px}
+.nav{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;padding:20px 0}
+.nav a{text-decoration:none;font-weight:500;color:var(--hero-muted)}
+.nav a:hover{color:var(--hero-ink);text-decoration:underline;text-underline-offset:5px}
+.nav .sp{flex:1}
+.tbtn{font:500 .9rem var(--body);color:var(--hero-ink);background:transparent;border:1px solid var(--hero-muted);border-radius:99px;padding:6px 14px;cursor:pointer}
+.intro{padding:48px 0 36px}
+.intro p{color:var(--hero-muted);font-size:1.25rem;margin:20px 0 28px;max-width:34ch}
+.btn{display:inline-block;background:var(--hero-ink);color:var(--hero);font-weight:500;padding:12px 22px;border-radius:4px;text-decoration:none;margin:0 10px 10px 0}
+.btn.alt{background:transparent;color:var(--hero-ink);border:1px solid var(--hero-ink)}
+
+.sld{border-top:1px solid var(--hline);padding-top:24px}
+.hint{color:var(--hero-muted);margin:0 0 20px;font-size:.95rem}
+.chain{display:flex;align-items:center;margin-bottom:24px}
+.wire{flex:1 1 14px;min-width:10px;height:2px;background:var(--hero-muted)}
+.node{font:500 .95rem/1.25 var(--body);color:var(--hero-ink);background:transparent;border:1px solid var(--hero-muted);border-radius:6px;padding:10px 12px;text-align:left;cursor:pointer;width:100%}
+.node small{display:block;font-weight:400;opacity:.8;margin-top:2px}
+.node:hover{border-color:var(--hero-ink)}
+.node[aria-pressed="true"]{background:var(--hero-ink);color:var(--hero);border-color:var(--hero-ink)}
+.chain .node{width:auto}
+.static{border:1px dashed var(--hero-muted);border-radius:6px;padding:10px 12px;font-weight:500;font-size:.95rem;line-height:1.25}
+.pw{position:relative}
+.pw::after{content:"";position:absolute;left:50%;top:100%;width:2px;height:24px;background:var(--hero-muted)}
+.branches{display:grid;grid-template-columns:repeat(5,1fr);gap:0 12px;border-top:2px solid var(--hero-muted)}
+.branches>div{position:relative;padding-top:22px}
+.branches>div::before{content:"";position:absolute;top:0;left:50%;width:2px;height:22px;background:var(--hero-muted)}
+.detail{margin-top:28px;padding-top:20px;border-top:1px solid var(--hline);min-height:150px}
+.detail p{color:var(--hero-muted);margin:8px 0 14px}
+.dtags{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.dtags li{border:1px solid var(--hero-muted);border-radius:4px;padding:3px 12px;font-size:.9rem}
+@media (max-width:760px){
+  .branches{grid-template-columns:repeat(2,1fr);gap:0 12px}
+  .node,.static{font-size:.85rem;padding:8px 9px}
+}
+section{padding:64px 0 8px}
+.ledger{list-style:none;margin:0;padding:0}
+.row{display:grid;grid-template-columns:1.1fr .9fr 2fr;gap:6px 32px;padding:24px 0;border-top:1px solid var(--line)}
+.row:last-child{border-bottom:1px solid var(--line)}
+.row .where{color:var(--muted)}
+.row p{margin:0}
+@media (max-width:760px){.row{grid-template-columns:1fr}}
+
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:36px}
+.cols>div{border-left:4px solid var(--ink);padding-left:18px}
+.cols p{color:var(--muted);margin:6px 0 0}
+.steps{display:flex;flex-wrap:wrap;gap:12px 0;list-style:none;margin:0;padding:0}
+.steps li{flex:1 1 200px;padding-right:20px}
+.steps h3{font-size:1.1rem}
+.steps p{color:var(--muted);margin:4px 0 0;font-size:.95rem}
+.steps li+li{border-left:1px solid var(--line);padding-left:20px}
+@media (max-width:640px){.steps li+li{border-left:0;padding-left:0}}
+
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:grid;grid-template-columns:200px 1fr;gap:4px 32px;padding:18px 0;border-top:1px solid var(--line)}
+.tl .when{color:var(--muted)}
+.tl p{margin:0}
+@media (max-width:640px){.tl li{grid-template-columns:1fr}}
+.tags{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:0}
+.tags li{background:var(--panel);border:1px solid var(--line);padding:6px 14px;border-radius:4px;font-size:.95rem}
+
+.contact{margin-top:64px;background:var(--hero);color:var(--hero-ink);padding:56px 0}
+.contact h2{margin-bottom:12px}
+.contact p{color:var(--hero-muted)}
+.addr{margin:12px 0 0;color:var(--hero-muted)}
+.addr a{color:var(--hero-ink)}
+footer{padding:24px 0 40px;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="band">
+  <div class="wrap">
+    <nav class="nav" aria-label="Sections">
+      <a href="#sites">Site experience</a><a href="#work">What I do</a><a href="#process">How I work</a><a href="#path">Background</a><a href="#contact">Contact</a>
+      <span class="sp"></span>
+      <button class="tbtn" id="theme" type="button">Switch theme</button>
+    </nav>
+    <div class="intro">
+      <h1>Tejas B M</h1>
+      <p>Testing engineer in Bengaluru. I find out what is wrong with electrical systems and write it up so it gets fixed.</p>
+      <a class="btn" href="#sites">See site experience</a><a class="btn alt" href="#contact">Get in touch</a>
+    </div>
+
+    <div class="sld">
+      <p class="hint">A typical site, from the grid to the load. Select a part to see what I test on it.</p>
+      <div class="chain">
+        <div class="static">Grid supply</div>
+        <span class="wire"></span>
+        <button class="node" type="button" data-k="sub" aria-pressed="true">Substation<small>Transformer</small></button>
+        <span class="wire"></span>
+        <div class="pw"><button class="node" type="button" data-k="panel" aria-pressed="false">Main LV panel<small>Distribution</small></button></div>
+      </div>
+      <div class="branches">
+        <div><button class="node" type="button" data-k="dg" aria-pressed="false">DG set<small>Standby power</small></button></div>
+        <div><button class="node" type="button" data-k="ups" aria-pressed="false">UPS<small>and batteries</small></button></div>
+        <div><button class="node" type="button" data-k="hvac" aria-pressed="false">HVAC and AHU<small>Cooling loads</small></button></div>
+        <div><button class="node" type="button" data-k="earth" aria-pressed="false">Earthing<small>ESSI, earth pits</small></button></div>
+        <div><button class="node" type="button" data-k="audit" aria-pressed="false">Whole site<small>Audits</small></button></div>
+      </div>
+      <div class="detail" aria-live="polite">
+        <h3 id="dt"></h3>
+        <p id="dp"></p>
+        <ul class="dtags" id="dtags"></ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="sites">
+    <h2>Site experience</h2>
+    <p class="lede">Client sites where I have carried out testing and audits.</p>
+    <ul class="ledger">
+      <li class="row"><h3>Foxconn</h3><div class="where">Bengaluru</div><div><p>Tested the complete electrical system and carried out an energy audit.</p></div></li>
+      <li class="row"><h3>Foxconn</h3><div class="where">Bengaluru</div><div><p>Tested a 220 kVA substation.</p></div></li>
+      <li class="row"><h3>Northern Trust</h3><div class="where">Bengaluru</div><div><p>HVAC audit.</p></div></li>
+      <li class="row"><h3>Google</h3><div class="where">Hyderabad</div><div><p>Energy audit.</p></div></li>
+      <li class="row"><h3>Blue Dart</h3><div class="where">Kerala, Tamil Nadu and Bengaluru</div><div><p>ESSI testing at all locations.</p></div></li>
+    </ul>
+  </section>
+
+  <section id="work">
+    <h2>What I do</h2>
+    <p class="lede">The kinds of work behind those sites, from commissioning to audits.</p>
+    <div class="cols">
+      <div><h3>Power quality and diagnostics</h3><p>Power Quality Analysis and Fluke diagnostics to trace faults, harmonics and unstable supply to a root cause.</p></div>
+      <div><h3>Backup power</h3><p>UPS testing, CAT DG testing and battery IR testing.</p></div>
+      <div><h3>Earthing</h3><p>ESSI and earth pit testing to verify that protective earthing does its job.</p></div>
+      <div><h3>Thermography and HVAC</h3><p>Thermal imaging of electrical equipment, plus HVAC and AHU testing.</p></div>
+      <div><h3>Commissioning</h3><p>Commissioning of electrical systems, with testing to confirm they are safe and ready to be handed over.</p></div>
+      <div><h3>Energy and electrical audits</h3><p>Industrial electrical audits and energy audits, documented in clear technical reports.</p></div>
+    </div>
+  </section>
+
+  <section id="process">
+    <h2>How I work</h2>
+    <ol class="steps">
+      <li><h3>Measure</h3><p>Capture real readings with calibrated instruments.</p></li>
+      <li><h3>Analyse</h3><p>Compare readings against limits and look for patterns.</p></li>
+      <li><h3>Find the root cause</h3><p>Trace the symptom back to what is actually wrong.</p></li>
+      <li><h3>Report</h3><p>Write findings and fixes so the client can act on them.</p></li>
+    </ol>
+  </section>
+
+  <section id="path">
+    <h2>Background</h2>
+    <ul class="tl">
+      <li><div class="when">July 2025 – present</div><div><h3>Junior Testing Engineer</h3><p>Gravity India Technologies Pvt. Ltd., Bengaluru</p></div></li>
+      <li><div class="when">2021 – 2025</div><div><h3>B.E. Electronics and Communication Engineering</h3><p>Global Academy of Technology</p></div></li>
+    </ul>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <ul class="tags">
+      <li>Fault diagnosis</li><li>Root cause analysis</li><li>Preventive maintenance</li><li>Technical reporting</li><li>Excel and Office</li><li>Fluke instruments</li><li>Thermography</li><li>Power quality analysis</li><li>UPS and DG testing</li><li>Earthing and battery testing</li><li>HVAC and AHU testing</li><li>Substation testing</li><li>Energy audits</li><li>Commissioning</li>
+    </ul>
+  </section>
+</main>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <h2>Get in touch</h2>
+    <p>Open to field service, commissioning and testing roles, including overseas.</p>
+    <a class="btn" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=tejasachar46@gmail.com&amp;su=Hello%20Tejas" target="_blank" rel="noopener">Email me</a>
+    <a class="btn alt" href="https://www.linkedin.com/in/tejas-achar67/" target="_blank" rel="noopener">LinkedIn</a>
+    <p class="addr">Or write to <a href="mailto:tejasachar46@gmail.com">tejasachar46@gmail.com</a> <button class="tbtn" id="copy" type="button">Copy</button></p>
+  </div>
+</section>
+<footer class="wrap">© 2026 Tejas B M</footer>
+
+<script>
+(function(){
+  var info={
+    sub:{t:'Substation and transformer',p:'Testing of substations, including a 220 kVA substation at Foxconn, Bengaluru, along with thermography and commissioning.',g:['Substation testing','Thermography','Commissioning']},
+    panel:{t:'Main LV panel and distribution',p:'Power quality analysis with Fluke instruments, to find harmonics, imbalance and unstable supply before they cause failures.',g:['Power quality analysis','Fluke diagnostics','Fault diagnosis']},
+    dg:{t:'DG set',p:'CAT DG testing, to confirm standby power takes over when the grid fails.',g:['CAT DG testing','Preventive maintenance']},
+    ups:{t:'UPS and batteries',p:'UPS testing and battery IR testing, to catch weak batteries and failing units early.',g:['UPS testing','Battery IR testing']},
+    hvac:{t:'HVAC and AHU',p:'HVAC and AHU testing, and HVAC audits such as the one at Northern Trust, Bengaluru.',g:['HVAC testing','AHU testing','HVAC audits']},
+    earth:{t:'Earthing',p:'ESSI and earth pit testing, including all Blue Dart locations in Kerala, Tamil Nadu and Bengaluru.',g:['ESSI testing','Earth pit testing']},
+    audit:{t:'Whole-site audits',p:'Industrial electrical audits and energy audits, such as Foxconn in Bengaluru and Google in Hyderabad, written up as clear technical reports.',g:['Electrical audits','Energy audits','Technical reporting']}
+  };
+  var nodes=document.querySelectorAll('.node'),dt=document.getElementById('dt'),dp=document.getElementById('dp'),dg=document.getElementById('dtags');
+  function show(k){
+    var d=info[k];dt.textContent=d.t;dp.textContent=d.p;dg.textContent='';
+    d.g.forEach(function(x){var li=document.createElement('li');li.textContent=x;dg.appendChild(li)});
+    nodes.forEach(function(n){n.setAttribute('aria-pressed',n.getAttribute('data-k')===k?'true':'false')});
+  }
+  nodes.forEach(function(n){n.addEventListener('click',function(){show(n.getAttribute('data-k'))})});
+  show('sub');
+  var cb=document.getElementById('copy');
+  cb.addEventListener('click',function(){
+    var a='tejasachar46@gmail.com',ok=function(){cb.textContent='Copied'},no=function(){cb.textContent='Select and copy'};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(a).then(ok,no)}else{no()}
+  });
+  var root=document.documentElement,mq=window.matchMedia?window.matchMedia('(prefers-color-scheme: dark)'):null;
+  document.getElementById('theme').addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme')||(mq&&mq.matches?'dark':'light');
+    root.setAttribute('data-theme',cur==='dark'?'light':'dark');
+  });
+})();
+</script>
+</body>
+</html>
